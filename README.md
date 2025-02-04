@@ -1,99 +1,137 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="120" alt="Nest Logo" /></a>
-</p>
+# Number Classification API
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+A RESTful API built with NestJS that classifies a number based on its mathematical properties and provides a fun fact.
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg" alt="Donate us"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow" alt="Follow us on Twitter"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+## Overview
 
-## Description
+This API was developed as part of the HNG12 Internship Stage 1 task. It takes a number as input and returns various mathematical properties, including whether it is prime, perfect, odd/even, an Armstrong number, and the sum of its digits. It also fetches a fun fact about the number from an external API.
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+## Features
 
-## Project setup
+- Classifies numbers based on mathematical properties
+- Checks if a number is prime, perfect, or an Armstrong number
+- Determines parity (odd/even)
+- Computes the sum of the digits
+- Fetches a fun fact about the number
+- Handles CORS
+- Fast response time (< 500ms)
+- Returns JSON responses with appropriate HTTP status codes
 
-```bash
-$ yarn install
+## Technologies Used
+
+- NestJS (Node.js framework)
+- TypeScript
+- Node.js
+- Jest (for testing)
+- Axios (for external API calls)
+
+## Live Demo
+
+API Endpoint: [https://your-api-domain.com/api/classify-number](https://your-api-domain.com/api/classify-number)
+
+## API Documentation
+
+### Endpoint
+
+```
+GET /api/classify-number?number=<integer>
 ```
 
-## Compile and run the project
+### Query Parameters
 
-```bash
-# development
-$ yarn run start
+| Parameter | Type   | Required | Description           |
+|-----------|--------|----------|----------------------|
+| number    | string | Yes      | The number to classify |
 
-# watch mode
-$ yarn run start:dev
+### Response Format
 
-# production mode
-$ yarn run start:prod
+#### 200 OK Response
+
+```json
+{
+  "number": 371,
+  "is_prime": false,
+  "is_perfect": false,
+  "properties": ["armstrong", "odd"],
+  "digit_sum": 11,
+  "fun_fact": "371 is an Armstrong number because 3^3 + 7^3 + 1^3 = 371"
+}
 ```
 
-## Run tests
+#### 400 Bad Request Response
 
+```json
+{
+  "number": "alphabet",
+  "error": true
+}
+```
+
+### Status Codes
+
+- 200: Successful request
+- 400: Bad request (invalid input)
+- 500: Server error
+
+## Local Development Setup
+
+1. Clone the repository:
 ```bash
-# unit tests
-$ yarn run test
+git clone https://github.com/your-username/number-classification-api.git
+```
 
-# e2e tests
-$ yarn run test:e2e
+2. Install dependencies:
+```bash
+cd number-classification-api
+yarn install
+```
 
-# test coverage
-$ yarn run test:cov
+3. Create a `.env` file in the root directory and add your configuration:
+```env
+PORT=3000
+API_BASE_URL=https://numbersapi.com/
+```
+
+4. Run the development server:
+```bash
+yarn start:dev
+```
+
+The API will be available at `http://localhost:3000`
+
+## Testing
+
+Run the test suite using:
+```bash
+yarn test
+```
+
+## Project Structure
+
+```
+src/
+├── main.ts                 # Application entry point
+├── app.module.ts           # Root module
+├── app.controller.ts       # Controller handling requests
+├── app.service.ts          # Business logic
+├── app.controller.spec.ts  # Controller tests
+├── utils.ts                # Utility functions for number classification
+└── getNumber.dto.ts        # DTO for number classification response
 ```
 
 ## Deployment
 
-When you're ready to deploy your NestJS application to production, there are some key steps you can take to ensure it runs as efficiently as possible. Check out the [deployment documentation](https://docs.nestjs.com/deployment) for more information.
+This API is deployed on a publicly accessible endpoint. The deployment process involves:
 
-If you are looking for a cloud-based platform to deploy your NestJS application, check out [Mau](https://mau.nestjs.com), our official platform for deploying NestJS applications on AWS. Mau makes deployment straightforward and fast, requiring just a few simple steps:
+1. Push changes to GitHub
+2. Automatic deployment via Vercel
+3. Configure environment variables on the deployment platform
 
-```bash
-$ yarn install -g mau
-$ mau deploy
-```
+## Related Resources
+- [Numbers API](http://numbersapi.com/#42)
+- [HNG Internship - Node.js Developers](https://hng.tech/hire/nodejs-developers)
+- [NestJS Official Documentation](https://docs.nestjs.com/)
 
-With Mau, you can deploy your application in just a few clicks, allowing you to focus on building features rather than managing infrastructure.
+## Author
 
-## Resources
-
-Check out a few resources that may come in handy when working with NestJS:
-
-- Visit the [NestJS Documentation](https://docs.nestjs.com) to learn more about the framework.
-- For questions and support, please visit our [Discord channel](https://discord.gg/G7Qnnhy).
-- To dive deeper and get more hands-on experience, check out our official video [courses](https://courses.nestjs.com/).
-- Deploy your application to AWS with the help of [NestJS Mau](https://mau.nestjs.com) in just a few clicks.
-- Visualize your application graph and interact with the NestJS application in real-time using [NestJS Devtools](https://devtools.nestjs.com).
-- Need help with your project (part-time to full-time)? Check out our official [enterprise support](https://enterprise.nestjs.com).
-- To stay in the loop and get updates, follow us on [X](https://x.com/nestframework) and [LinkedIn](https://linkedin.com/company/nestjs).
-- Looking for a job, or have a job to offer? Check out our official [Jobs board](https://jobs.nestjs.com).
-
-## Support
-
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
-
-## Stay in touch
-
-- Author - [Kamil Myśliwiec](https://twitter.com/kammysliwiec)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
-
-## License
-
-Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
+[Reagan Watmon]
