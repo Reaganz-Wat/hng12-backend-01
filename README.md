@@ -27,14 +27,14 @@ This API was developed as part of the HNG12 Internship Stage 1 task. It takes a 
 
 ## Live Demo
 
-API Endpoint: [https://your-api-domain.com/api/classify-number](https://your-api-domain.com/api/classify-number)
+API Endpoint: [https://hng12-backend-01-git-main-reaganz-wats-projects.vercel.app/api/classify-number](https://hng12-backend-01-git-main-reaganz-wats-projects.vercel.app/api/classify-number)
 
 ## API Documentation
 
 ### Endpoint
 
 ```
-GET /api/classify-number?number=<integer>
+GET https://hng12-backend-01-git-main-reaganz-wats-projects.vercel.app/api/classify-number?number=<integer>
 ```
 
 ### Query Parameters
@@ -77,19 +77,18 @@ GET /api/classify-number?number=<integer>
 
 1. Clone the repository:
 ```bash
-git clone https://github.com/your-username/number-classification-api.git
+git clone https://github.com/Reaganz-Wat/hng12-backend-01.git
 ```
 
 2. Install dependencies:
 ```bash
-cd number-classification-api
+cd hng12-backend-01
 yarn install
 ```
 
 3. Create a `.env` file in the root directory and add your configuration:
 ```env
 PORT=3000
-API_BASE_URL=https://numbersapi.com/
 ```
 
 4. Run the development server:
